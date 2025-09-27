@@ -1,0 +1,29 @@
+---
+model:
+  pz: 2  # Dims of each latent in hierarchy (first is bottom, Z1). Num elements in list is size of hierarchy
+  hidden_dim: 50
+  activation: 'leaky_relu'  # choose from 'relu', 'leaky_relu', 'tanh', 'sigmoid'
+  lrelu_slope: 0.01  # slope for leaky relu
+  num_layers: 2  # Number of layers (linear+activation pairs) per MLP
+  layer_growth: 'const'
+  var_p_noise: 0.01
+  shared_net: False
+  learn_mu_prior: False
+  learn_var_p: False
+  ivae_loss: True  # true means compute loss as the sum of 3 log likelihood terms, false means use KL divergence
+  compound_posterior: False
+
+train:
+  rng: 1
+  lr: 0.001
+  epochs: 5
+  batch_size: 64
+  data_split: [0.6, 0.1, 0.3]  # percent for train, validation, test data split
+  data_src: 'MNIST'  # choose from 'MNIST', 'ivae1'
+  validation: False  # whether to use validation loss for scheduler
+  # iVAE-specific settings
+  N: 40000
+  one_hot: False
+  num_u: -1  # if > 0, choose this many unique u values, else choose all
+  N_trunc: -1
+  zscore_u: True  # only used when M is NOT one-hot encoding

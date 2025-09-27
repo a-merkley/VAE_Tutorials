@@ -1,0 +1,18 @@
+---
+model:
+  pz: 2  # Dimension of latent
+  hidden_dim: 50
+  activation: 'leaky_relu'  # choose from 'relu', 'leaky_relu', 'tanh', 'sigmoid'
+  lrelu_slope: 0.01  # slope for leaky relu
+  num_layers: 2  # Number of layers (linear+activation pairs) per MLP
+  layer_growth: 'const'
+  norm_type: 'none'  # Type of normalization, choose from 'batch', 'weight', 'batch_weight' (both), 'none'
+
+train:
+  rng: 1
+  lr: 0.001
+  epochs: 20
+  batch_size: 256
+  data_split: [0.6, 0.1, 0.3]  # percent for train, validation, test data split
+  data_src: 'MNIST'  # choose from 'MNIST', 'ivae1'
+  validation: False  # whether to use validation loss for scheduler

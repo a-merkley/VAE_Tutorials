@@ -1,0 +1,18 @@
+---
+model:
+  pz: [64, 32, 16, 8, 4]  # Dims of each latent in hierarchy (first is bottom, Z1). Num elements in list is size of hierarchy
+  hidden_dim: [256, 128, 64, 32, 16]  # Hidden layer dimensions for each level. **Must be same length as pz
+  activation: 'leaky_relu'  # choose from 'relu', 'leaky_relu', 'tanh', 'sigmoid'
+  lrelu_slope: 0.01  # slope for leaky relu
+  num_layers: 2  # Number of layers (linear+activation pairs) per MLP
+  norm_type: 'batch'  # Type of normalization, choose from 'batch', 'weight', 'batch_weight' (both), 'none'
+  n_warmup: 3  # Number of epochs to 'warmup' (anneal KL loss before optimizing true ELBO). -1 for no warmup
+
+train:
+  rng: 1
+  lr: 0.0001
+  epochs: 5
+  batch_size: 512
+  data_split: [0.7, 0.1, 0.2]  # percent for train, validation, test data split
+  data_src: 'MNIST'  # choose from 'MNIST', 'ivae1'
+  validation: False  # whether to use validation loss for scheduler
